@@ -1,5 +1,5 @@
-import tkinter as tk  # Сам GUI
-import shlex  # Работа с командной строкой и кавычками
+import tkinter as tk  """Сам GUI"""
+import shlex  """Работа с командной строкой и кавычками"""
 #реализация первого номера
 
 
@@ -11,18 +11,18 @@ class Emulator(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        # 2. Заголовок окна содержит имя VFS
+        """ 2. Заголовок окна содержит имя VFS""
         self.title(f"Эмулятор VFS — {VFS_NAME}")
 
         self.output = tk.Text(self, height=20, width=80, bg="black", fg="white")
         self.output.pack(fill=tk.BOTH, expand=True)
 
-        # Строка ввода
+        """Строка ввода"""
         self.entry = tk.Entry(self, bg="white", fg="black", insertbackground="black")
         self.entry.pack(fill=tk.X)
         self.entry.bind("<Return>", self.on_enter)
 
-        # Выводим первое приглашение ко вводу
+        """Выводим первое приглашение ко вводу"""
         self.show_prompt()
 
     def show_prompt(self):
@@ -33,14 +33,14 @@ class Emulator(tk.Tk):
         user_input = self.entry.get()
         self.entry.delete(0, tk.END)
 
-        # Печатаем введенную пользователем команду в консоль
+        """Печатаем введенную пользователем команду в консоль"""
         self.output.insert(tk.END, user_input + "\n")
 
-        # 3. Парсер аргументов с учетом кавычек
+        """3. Парсер аргументов с учетом кавычек"""
         try:
             args = shlex.split(user_input)
         except Exception as e:
-            # 4. Сообщение об ошибке (незакрытые кавычки и т.д.)
+            """4. Сообщение об ошибке (незакрытые кавычки и т.д.)"""
             self.output.insert(tk.END, f"Ошибка синтаксиса/кавычек: {e}\n")
             self.show_prompt()
             return
@@ -72,18 +72,18 @@ class Emulator(tk.Tk):
             else:
                 self.output.insert(tk.END, f"cd: {args}\n")
 
-        # 5. Команда-заглушка ls
+        """5. Команда-заглушка ls"""
         elif command == "ls":
             self.output.insert(tk.END, f"ls: {args}\n")
 
-        # 6. Команда exit
+        """6. Команда exit"""
         elif command == "exit":
             if len(args) > 0:
                 self.output.insert(tk.END, "Ошибка: команда exit не принимает аргументов\n")
                 return
             self.destroy()
 
-        # 4. Сообщение о неизвестной команде
+        """4. Сообщение о неизвестной команде"""
         else:
             self.output.insert(tk.END, f"Ошибка: неизвестная команда '{command}'\n")
 
