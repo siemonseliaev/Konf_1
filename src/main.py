@@ -11,7 +11,7 @@ class Emulator(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        """ 2. Заголовок окна содержит имя VFS""
+        """ 2. Заголовок окна содержит имя VFS"""
         self.title(f"Эмулятор VFS — {VFS_NAME}")
 
         self.output = tk.Text(self, height=20, width=80, bg="black", fg="white")
