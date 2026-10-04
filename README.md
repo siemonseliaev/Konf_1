@@ -29,3 +29,24 @@
    ```bash
    git clone [https://github.com/siemonseliaev/Konf_1.git](https://github.com/siemonseliaev/Konf_1.git)
    cd Konf_1
+
+
+2. Пример использования
+
+
+```text
+Начальная строка в ковычках (VFS)help
+Команды:
+help - показать эту справку
+cd - ввести 1 элемент через \
+Is - ввести массив элементов через \
+exit - выйти из программы
+Начальная строка в ковычках (VFS)Is -l /home/user "my folder"
+ls ['-l', '/home/user', 'my folder']
+Начальная строка в ковычках (VFS)cd "my directory"
+cd ['my directory']
+Начальная строка в ковычках (VFS)cd folder1 folder2
+Необходим один аргумент
+Начальная строка в ковычках (VFS)unknown_command
+Ошибка, попробуйте ввести строку снова
+Начальная строка в ковычках (VFS)exit
