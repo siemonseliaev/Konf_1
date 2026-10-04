@@ -14,7 +14,6 @@ class Emulator(tk.Tk):
         # 2. Заголовок окна содержит имя VFS
         self.title(f"Эмулятор VFS — {VFS_NAME}")
 
-        # Виджет вывода текста
         self.output = tk.Text(self, height=20, width=80, bg="black", fg="white")
         self.output.pack(fill=tk.BOTH, expand=True)
 
@@ -60,13 +59,12 @@ class Emulator(tk.Tk):
         if command == "help":
             self.output.insert(tk.END,
                 "Доступные команды:\n"
-                "  ls [arg...] - вывести список файлов (заглушка)\n"
-                "  cd <path>   - сменить директорию (заглушка)\n"
-                "  help        - показать справку\n"
-                "  exit        - завершить работу\n"
+                "ls - вывести список файлов (заглушка)\n"
+                "cd  - сменить директорию (заглушка)\n"
+                "help        - показать справку\n"
+                "exit        - завершить работу\n"
             )
 
-        # 5. Команда-заглушка cd
         elif command == "cd":
             if len(args) != 1:
                 # 4. Сообщение об ошибке неверных аргументов
