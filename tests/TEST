@@ -1,0 +1,20 @@
+test 
+
+help
+ls
+cd home
+ls
+cd user
+ls
+
+cd /docs/projects
+ls
+
+cd non_existing_folder
+ls non_existing_folder
+cd folder1 folder2
+
+vfs-init
+ls
+cd /
+ls
