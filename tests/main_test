@@ -1,0 +1,46 @@
+import pytest
+from src.main import cd, ls, exit
+
+@pytest.mark.parametrize(
+    "args, expected",
+    [
+        ([], "ls: []\n"),
+        (["file1"], "ls: ['file1']\n"),
+        (["file1", "folder2"], "ls: ['file1', 'folder2']\n"),
+    ],
+)
+def test_ls(emulator, args: list[str], expected: str) -> None:
+    """Тестирование команды ls"""
+    emulator.parser("ls", args)
+    result = emulator.output.get("1.0", "end")
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "args, expected",
+    [
+        (["dir1"], "cd: ['dir1']\n"),
+        ([], "Ошибка: cd требует ровно 1 аргумент\n"),
+        (["dir1", "dir2"], "Ошибка: cd требует ровно 1 аргумент\n"),
+    ],
+)
+def test_cd(emulator, args: list[str], expected: str) -> None:
+    """Тестирование команды cd"""
+    emulator.parser("cd", args)
+    result = emulator.output.get("1.0", "end")
+    assert result == expected
+
+
+def test_exit(emulator) -> None:
+    """Тестирование команды exit"""
+    # Проверка вызова метода destroy() при правильном вызове exit
+    emulator.parser("exit", [])
+    # Если метод прошел без исключений и окно уничтожено, тест успешен
+    assert not emulator.winfo_exists()
+
+
+def test_exit_with_args(emulator) -> None:
+    """Тестирование ошибки команды exit при передаче аргументов"""
+    emulator.parser("exit", ["1"])
+    result = emulator.output.get("1.0", "end")
+    assert result == "Ошибка: команда exit не принимает аргументов\n"
