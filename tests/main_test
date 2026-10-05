@@ -1,5 +1,15 @@
 import pytest
-from src.main import cd, ls, exit
+from src.main import Emulator
+
+
+@pytest.fixture
+def emulator():
+    """Фикстура для создания объекта эмулятора без вызова GUI."""
+    app = Emulator()
+    # Очищаем поле вывода перед каждым тестом
+    app.output.delete("1.0", "end")
+    return app
+
 
 @pytest.mark.parametrize(
     "args, expected",
