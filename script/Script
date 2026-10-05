@@ -1,1 +1,8 @@
-
+help
+ls
+ls value 1 "value 2"
+cd value 1
+cd value 1 value 2
+unknown_command
+exit extra_arg
+exit
