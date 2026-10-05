@@ -11,7 +11,6 @@ class Emulator(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        # Заголовок окна содержит имя VFS
         self.title(f"Эмулятор VFS — {VFS_NAME}")
 
         self.output = tk.Text(
@@ -19,14 +18,14 @@ class Emulator(tk.Tk):
         )
         self.output.pack(fill=tk.BOTH, expand=True)
 
-        # Строка ввода
+        
         self.entry = tk.Entry(
             self, bg="white", fg="black", insertbackground="black"
         )
         self.entry.pack(fill=tk.X)
         self.entry.bind("<Return>", self.on_enter)
 
-        # Выводим первое приглашение ко вводу
+      
         self.show_prompt()
 
     def show_prompt(self):
@@ -39,14 +38,12 @@ class Emulator(tk.Tk):
         user_input = self.entry.get()
         self.entry.delete(0, tk.END)
 
-        # Печатаем введенную пользователем команду в консоль
         self.output.insert(tk.END, user_input + "\n")
 
-        # Парсер аргументов с учетом кавычек
         try:
             args = shlex.split(user_input)
         except Exception as e:
-            # Сообщение об ошибке (незакрытые кавычки и т.д.)
+    
             msg = f"Ошибка синтаксиса/кавычек: {e}\n"
             self.output.insert(tk.END, msg)
             self.show_prompt()
@@ -109,7 +106,6 @@ class Emulator(tk.Tk):
         if handler:
             handler(args)
         else:
-            # Сообщение о неизвестной команде
             msg = f"Ошибка: неизвестная команда '{command}'\n"
             self.output.insert(tk.END, msg)
 
